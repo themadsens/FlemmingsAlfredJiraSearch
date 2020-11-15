@@ -1,5 +1,6 @@
 # flemmingsAlfredJiraSearch
 Search your Jira server with Alfred
+!(img/search.png)
 ### A workflow for quickly looking trough your Jira issues. 
 The query looks like: [PROJECT [O/C]] search phrase
 <dl>
@@ -25,4 +26,3 @@ This workflow requires the following environment variables:
 
 You also need node to be installed as /usr/local/bin/node.
 Eg. via "brew install node"
-"*p
