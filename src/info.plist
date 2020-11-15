@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>dk.themadsens.jirasearch</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>63F60794-BB56-4415-9372-BAF974C3A7E1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2B14B515-E9CC-429E-B59B-C63B3A0297C8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Flemming Madsen</string>
+	<key>description</key>
+	<string>Search Jira Server</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Jira Search</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>36</integer>
+				<key>keyword</key>
+				<string>jira</string>
+				<key>queuedelaycustom</key>
+				<integer>5</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>2</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Retrieving candidates ...</string>
+				<key>script</key>
+				<string># Base URL of the API call
+baseurl="https://${domain}.atlassian.net/rest/api/3/issue/picker"
+
+#Even tried this with no luck
+curl -G -v -S $baseurl --data-urlencode "query=${1}" -H $header | /usr/local/bin/jq '.sections[0].issues | map({uid: .id, title: .key, subtitle: .summaryText, arg: .key }) | { items: . }'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>makerequest.js</string>
+				<key>subtext</key>
+				<string>Search Jira</string>
+				<key>title</key>
+				<string>Search Jira</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>63F60794-BB56-4415-9372-BAF974C3A7E1</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>open "${server}/browse/${1}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2B14B515-E9CC-429E-B59B-C63B3A0297C8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>A workflow for quickly looking trough your Jira issues. 
+
+The query looks like: [PROJECT [O/C]] search phrase
+
+PROJECT
+An optional project id in uppercase
+
+O/C
+An optional "O" for status "not closed" or "C" for status "closed"
+
+search phrase
+The search phrase as described for advanced text field search
+
+
+This workflow requires the following environment variables:
+
+"server"
+The Jira base URL
+
+"auth" 
+The user and password as user:pass
+
+You also need node to be installed as /usr/local/bin/node.
+Eg. via "brew install node"</string>
+	<key>uidata</key>
+	<dict>
+		<key>2B14B515-E9CC-429E-B59B-C63B3A0297C8</key>
+		<dict>
+			<key>xpos</key>
+			<integer>215</integer>
+			<key>ypos</key>
+			<integer>105</integer>
+		</dict>
+		<key>63F60794-BB56-4415-9372-BAF974C3A7E1</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>105</integer>
+		</dict>
+	</dict>
+	<key>variables</key>
+	<dict>
+		<key>auth</key>
+		<string>fm:ccswe124</string>
+		<key>server</key>
+		<string>http://ampjira</string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>server</string>
+		<string>auth</string>
+	</array>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/themadsens/FlemmingsAlfredJiraSearch</string>
+</dict>
+</plist>
