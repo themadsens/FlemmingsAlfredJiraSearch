@@ -1,6 +1,8 @@
 # flemmingsAlfredJiraSearch
 Search your Jira server with Alfred
-!(img/search.png)
+![search](/img/search.png "Search dialog")
+Preview jiras with the &lt;shift> key
+![preview](/img/quicklook.png "Quick look")
 ### A workflow for quickly looking trough your Jira issues. 
 The query looks like: [PROJECT [O/C]] search phrase
 <dl>
