@@ -12,11 +12,41 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>2B14B515-E9CC-429E-B59B-C63B3A0297C8</string>
+				<string>1475C7A1-8977-4967-87FD-8799918B7805</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F8E6A96A-B952-4E4D-B3B9-FC6803E0B909</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Copy as JSON</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>99DB739C-BE06-4BAC-BC67-4B3CD7069758</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>06904D0B-B51B-4472-ABCB-D8532A110BCF</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Action preview as file</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -32,6 +62,46 @@
 	<string>Jira Search</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>1475C7A1-8977-4967-87FD-8799918B7805</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F8E6A96A-B952-4E4D-B3B9-FC6803E0B909</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -70,7 +140,9 @@ curl -G -v -S $baseurl --data-urlencode "query=${1}" -H $header | /usr/local/bin
 				<key>scriptfile</key>
 				<string>makerequest.js</string>
 				<key>subtext</key>
-				<string>Search Jira</string>
+				<string>Query: PROJ-ID | [PROJ [O/C]] &lt;search&gt;. &lt;Shift&gt; to preview
+The query looks like: [PROJECT [O/C]] search phrase
+The query looks like: [PROJECT [O/C]] search phrase</string>
 				<key>title</key>
 				<string>Search Jira</string>
 				<key>type</key>
@@ -88,31 +160,51 @@ curl -G -v -S $baseurl --data-urlencode "query=${1}" -H $header | /usr/local/bin
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>autopaste</key>
 				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>open "${server}/browse/${1}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>2B14B515-E9CC-429E-B59B-C63B3A0297C8</string>
+			<string>99DB739C-BE06-4BAC-BC67-4B3CD7069758</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string>{query}</string>
+				<key>sortBy</key>
+				<integer>0</integer>
+				<key>sortDirection</key>
+				<integer>0</integer>
+				<key>sortFoldersAtTop</key>
+				<false/>
+				<key>sortOverride</key>
+				<false/>
+				<key>stackBrowserView</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinalfred</string>
+			<key>uid</key>
+			<string>06904D0B-B51B-4472-ABCB-D8532A110BCF</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
 	<string>A workflow for quickly looking trough your Jira issues. 
 
-The query looks like: [PROJECT [O/C]] search phrase
+The query looks like: [PROJECT [O/C]] search-phrase 
+Or a ticket reference: PROJECT-9999
 
 PROJECT
 An optional project id in uppercase
@@ -123,48 +215,114 @@ An optional "O" for status "not closed" or "C" for status "closed"
 search phrase
 The search phrase as described for advanced text field search
 
-
-This workflow requires the following environment variables:
-
-"server"
-The Jira base URL
-
-"auth" 
-The user and password as user:pass
-
-You also need node to be installed as /usr/local/bin/node.
+You need node to be installed in your path.
 Eg. via "brew install node"</string>
 	<key>uidata</key>
 	<dict>
-		<key>2B14B515-E9CC-429E-B59B-C63B3A0297C8</key>
+		<key>06904D0B-B51B-4472-ABCB-D8532A110BCF</key>
 		<dict>
 			<key>xpos</key>
-			<integer>215</integer>
+			<real>270</real>
 			<key>ypos</key>
-			<integer>105</integer>
+			<real>410</real>
+		</dict>
+		<key>1475C7A1-8977-4967-87FD-8799918B7805</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>30</real>
 		</dict>
 		<key>63F60794-BB56-4415-9372-BAF974C3A7E1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>105</integer>
+			<real>185</real>
+		</dict>
+		<key>99DB739C-BE06-4BAC-BC67-4B3CD7069758</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>285</real>
+		</dict>
+		<key>F8E6A96A-B952-4E4D-B3B9-FC6803E0B909</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>155</real>
 		</dict>
 	</dict>
-	<key>variables</key>
-	<dict>
-		<key>auth</key>
-		<string>fm:ccswe124</string>
-		<key>server</key>
-		<string>http://ampjira</string>
-	</dict>
-	<key>variablesdontexport</key>
+	<key>userconfigurationconfig</key>
 	<array>
-		<string>server</string>
-		<string>auth</string>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>http://myjira.localnet</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The main URL of your Jira server</string>
+			<key>label</key>
+			<string>Jira base URL</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>server</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>user:pass</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Your username and password as &lt;user&gt;:&lt;pass&gt;</string>
+			<key>label</key>
+			<string>Authentication</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>auth</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>10</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Maximum number of results to be shown</string>
+			<key>label</key>
+			<string>Max results</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>maxresults</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/themadsens/FlemmingsAlfredJiraSearch</string>
 </dict>
